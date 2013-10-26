@@ -1,0 +1,6 @@
+{
+  "name": "Angular Contact Manager",
+  "dependencies": {
+    "angular": "~1.0.8"
+  }
+}
