@@ -1,0 +1,10 @@
+<div class="container">
+	<h1 class="center-text">Contacts</h1>
+	<div ng-repeat="contact in contacts">
+        <div class="contact-list-item">
+            {{contact.name.first}} {{contact.name.last}}
+	   	   <a href="#/edit/{{getFullName(contact)}}/{{contact._id}}">edit</a>
+		   <a href="#" ng-click="delete(contact)" ng-show="contact">delete</a>
+	   </div>
+	</div>
+</div>
