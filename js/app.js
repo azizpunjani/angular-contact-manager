@@ -1,6 +1,5 @@
 
 var contactManager = angular.module('ContactManager', ['ngResource']);
-var globalContact; 
 contactManager.controller('ListController', ['$scope','Contacts' , function($scope, Contacts) {
     globalContacts = Contacts;
     $scope.contacts = Contacts.getAll(); 
@@ -9,14 +8,9 @@ contactManager.controller('ListController', ['$scope','Contacts' , function($sco
     }
 
     $scope.delete = function(contact) {
-        contact.$delete(function(){
-        });
-    }
+        Contacts.delete(contact, function(){
 
-    deleteContact = function(contact) {
-        if (contact._id in $scope.contacts) {
-            delete $scope.contacts[contact._id];
-        }
+        });
     }
 }]);
 
@@ -27,68 +21,115 @@ contactManager.controller('CreateController', ['$scope', 'Contacts', function($s
 contactManager.controller('EditController', ['$scope','$routeParams', '$location', 'Contacts', function($scope, $routeParams, $location, Contacts) {
     $scope.contact = Contacts.get($routeParams.id);
     $scope.save = function() {
-        Contacts.update($scope.contact, function(){
-            $location.path('/');  
+        $scope.contact.$update(function(){
+            $location.path('/');
         });
+    }
+
+    $scope.delete = function() {
+        Contacts.delete($scope.contact, function(){
+            $location.path('/');    
+        });
+    }
+
+    $scope.cancel = function() {
+        $location.path('/');
     }
 }]);
 
 contactManager.config(['$routeProvider', function($routeProvider){
    $routeProvider
-    .when('/', { controller: 'ListController', templateUrl: 'app/js/views/list.html' })
-    .when('/create', { controller: 'CreateController', templateUrl: 'app/js/views/create.html' })
-    .when('/edit/:username/:id', { controller: 'EditController', templateUrl: 'app/js/views/edit.html' })
+    .when('/', { controller: 'ListController', templateUrl: '/js/views/list.html' })
+    .when('/create', { controller: 'CreateController', templateUrl: '/js/views/create.html' })
+    .when('/edit/:username/:id', { controller: 'EditController', templateUrl: '/js/views/edit.html' })
     .otherwise('/'); 
 }]);
 
 contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($resource, $cacheFactory) {
-   var cachedContacts = {},
+   var cache,
        Contacts; 
 
     Contacts = $resource('/contacts/:id',{ id: '@_id' }, {
         query: { method: 'GET', params: { id: '' }, isArray: true },
         update: { method: 'PUT', params: { id: '@id' } }
     });
-    
-    populateCache = function(contacts) {
-        contacts.forEach(function(contact) {
-           cachedContacts[contact._id] = contact; 
-        });
-    }
 
-    isNotEmpty = function(obj) {
-        for (var i in obj) {
-            if (obj.hasOwnProperty(i)) {
-                return true; 
+    cache = (function(){
+        var contacts = [];
+        return {
+            hasContacts: function() {
+                return contacts.length > 0;
+            }, 
+
+            getContacts: function() {
+                return contacts;
+            }, 
+
+            putContacts: function(newContacts) {
+                contacts = newContacts;
+            }, 
+
+            addContact: function(contact) {
+                contacts.push(contact);
+            },
+
+            indexOf: function(id) {
+                var arrayIndex; 
+                contacts.forEach(function(contact, index){
+                    if (id === contact._id) {
+                        arrayIndex = index;
+                    }
+                });
+                return arrayIndex;
+            },
+
+            removeContact: function(id) {
+                contacts.forEach(function(contact, index){
+                    if (id === contact._id) {
+                        contacts.splice(index, 1);
+                        return true;
+                    }
+                });
+            },
+
+            removeContactByIndex: function(index) {
+                contacts.splice(index, 1);
+            },
+
+            getContact: function(id) {
+                var cachedContact; 
+                contacts.forEach(function(contact, index) {
+                    if (id === contact._id) {
+                        cachedContact = contact;
+                        return true;
+                    } 
+                });
+                return cachedContact;
             }
+
         }
-        return false;
-    }
+    })();
+
 
     return {
         getAll: function(useCache) {                
             var contacts,
             useCache = useCache || true;
 
-            if (isNotEmpty(cachedContacts) && useCache) {
-                return cachedContacts;      
+            if (cache.hasContacts() && useCache) {
+                return cache.getContacts();      
             } else {
                 contacts = Contacts.query(function(){
-                    populateCache(contacts);
+                    cache.putContacts(contacts);
                 });
                 return contacts;
             }
         },
-        get: function(id) {
-            var contact, 
-                cachedContact;
 
-            if (isNotEmpty(cachedContacts) && id in cachedContacts) {
-                return cachedContacts[id]; 
-            } else {
-                contact = Contacts.get({ id: id });
-            }
+        get: function(id) {    
+            return cache.getContact(id) || Contacts.get({ id: id });
         }, 
+
         create: function(contact, success, failure) {
            var newContact = new Contacts(contact);
 
@@ -103,11 +144,28 @@ contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($reso
               }
            });
         },
+
+        delete: function(contact, success) {
+            var contactIndex = cache.indexOf(contact._id);
+
+            contact.$delete(function(){
+                if (typeof success === 'function') {
+                    cache.removeContactByIndex(contactIndex);
+                    success.apply(null, arguments);
+                }
+            }, function() {
+                if (typeof failure === 'function') {
+                    failure.apply(null, arguments);
+                }
+            });
+            
+        },
+
         update: function(contact, success) {
             contact.$update(function(){
                success();
             });  
         },
-        getCache: function() { return cachedContacts; } 
+        getCache: function() { return cache.getContacts(); } 
     }
 }]);
