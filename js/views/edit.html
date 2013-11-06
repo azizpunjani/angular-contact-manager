@@ -1,12 +1,37 @@
-<div class="container">
-	<h1 class="center-text">Edit Contact</h1>
-	<fieldset>
-		<legend>Name</legend>
-	<label>First: <input type="text" ng-model="contact.name.first"></label>
-	<label>Last: <input type="text" ng-model="contact.name.last"></label>
-    </fieldset>
-	<label>E-mail: <input type="text" ng-model="contact.email"></label>
-	<button ng-click="cancel()">Cancel</button> 
-	<button ng-click="save()">Save</button> 
-	<button ng-click="delete()">Delete</button>
+<h1 class="center-text">{{action}} Contact</h1>
+<div class="details-container">
+    <div class="details-section">
+        <h4>Name</h4>
+        <label>First</label><input type="text" ng-model="contact.name.first">   
+        <label>Last</label><input type="text" ng-model="contact.name.last">   
+    </div>
+
+    <div class="details-section">
+        <h4>Phone</h4>
+        <label>Mobile<input type="text" ng-model="contact.phone.mobile"></label>
+        <label>Home<input type="text" ng-model="contact.phone.home"></label>
+    </div>
+
+    <div class="details-section">
+        <h4>Email</h4>
+        <input type="text" ng-model="contact.email">
+    </div>
+
+    <div class="details-section">
+        <h4>Address</h4>
+        <div class="input-wrap">
+            <label>Street<input type="text" ng-model="contact.address.street"></label>
+        </div>
+        <div class="input-wrap">
+            <label>City<input type="text" ng-model="contact.address.city"></label>
+            <label>State<input type="text" ng-model="contact.address.state"></label>
+        </div>
+        <div class="input-wrap">
+            <label>Zip<input type="text" ng-model="contact.address.zip"></label>
+        </div>
+    </div>
+
+    <button ng-click="cancel()">Cancel</button> 
+    <button ng-click="save()">Save</button> 
+    <button ng-show="showDelete" ng-click="delete()">Delete</button>
 </div>

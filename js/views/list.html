@@ -1,10 +1,15 @@
-<div class="container">
-	<h1 class="center-text">Contacts</h1>
-	<div ng-repeat="contact in contacts">
+<h1 class="center-text">Contacts</span></h1>
+<div class="contacts-container">
+    <div>
+        <input type="text" placeholder="Search for contact..">
+    </div>
+    <div ng-repeat="contact in contacts">
         <div class="contact-list-item">
-            {{contact.name.first}} {{contact.name.last}}
-	   	   <a href="#/edit/{{getFullName(contact)}}/{{contact._id}}">edit</a>
-		   <a href="#" ng-click="delete(contact)" ng-show="contact">delete</a>
-	   </div>
-	</div>
+            <span class="icon-user"></span>
+            <a title="edit" class="contact-fullname" href="#/edit/{{getFullName(contact)}}/{{contact._id}}">
+                {{contact.name.first}} {{contact.name.last}}
+            </a>
+           <a title="delete" class="icon icon-remove size-medium" href="#" ng-click="delete(contact)" ng-show="contact"></a>
+       </div>
+    </div>
 </div>

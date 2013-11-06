@@ -1,0 +1,87 @@
+@import "compass/reset";
+@import "compass/css3/";
+@import url(http://fonts.googleapis.com/css?family=Prosto+One|Arimo);
+
+body {
+    background: transparent url('../images/background.png') repeat;
+    font-family: 'Arimo', cursive;
+}
+
+.details-section {
+    h4 {
+        font-weight: bold;
+        color: gray;
+        font-size: 20px;
+        margin: 10px 0;
+    }
+}
+
+.main-container {
+    margin: 60px auto;
+    width: 460px;
+    background-color: white;
+    @include box-shadow(rgba(175, 175, 175, 0.9) 0px 0px 7px 3px);
+    @include border-radius(5px);
+
+    h1 {
+        font-size: 33px;
+        font-family: 'Oxygen', sans-serif;
+        text-align: center;
+        text-shadow: 0px 1px 1px white;
+        background: linear-gradient(rgb(243, 243, 243), rgb(192, 192, 192));
+        padding: 12px;
+        border-radius: 4px 2px 0 0;
+        border-bottom: 3px solid rgba(173, 173, 173, 0.42);
+        color: rgba(41, 41, 41, 0.53);
+    }
+}
+
+.contact-list-item {
+    $border: 1px dashed rgb(201, 201, 201);
+
+    padding: 20px;
+    margin: 8px 1px;
+    border-top: $border;
+    border-bottom: $border;
+    font-size: 28px;
+    background-color: rgba(233, 233, 233, 0.66);
+    color: rgb(133, 133, 133);
+
+    a.icon {
+        text-decoration: none;
+        color: inherit;
+        float: right;
+        margin: 0 10px;
+        border: 1px solid gray;
+        padding: 5px;
+        border-radius: 11px;
+    }
+}
+
+.contact-fullname {
+   color: inherit; 
+}
+
+.size-medium {
+    font-size: 16px;
+}
+
+.contacts-container {
+   overflow-y: scroll; 
+   height: 350px;
+}
+
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}

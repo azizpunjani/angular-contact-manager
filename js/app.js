@@ -4,7 +4,13 @@ contactManager.controller('ListController', ['$scope','Contacts' , function($sco
     globalContacts = Contacts;
     $scope.contacts = Contacts.getAll(); 
     $scope.getFullName = function(contact) {
-        return [contact.name.first, contact.name.last].join('_');
+        var first = sanitize(contact.name.first), 
+            last = sanitize(contact.name.last);
+        return [first, last].join('_');
+    }
+    
+    function sanitize(name) {
+        return name.replace(/[^\w\d']/g,'');
     }
 
     $scope.delete = function(contact) {
@@ -14,11 +20,22 @@ contactManager.controller('ListController', ['$scope','Contacts' , function($sco
     }
 }]);
 
-contactManager.controller('CreateController', ['$scope', 'Contacts', function($scope, Contacts) {
-    
+contactManager.controller('CreateController', ['$scope', '$location', 'Contacts', function($scope, $location,  Contacts) {
+   $scope.action = 'Create';  
+   $scope.showDelete = false;
+   $scope.cancel = function() {
+       $location.path('/');
+   }
+   $scope.save = function(){
+       Contacts.create($scope.contact, function(){
+           $location.path('/');
+       });
+   }
+
 }]);
 
 contactManager.controller('EditController', ['$scope','$routeParams', '$location', 'Contacts', function($scope, $routeParams, $location, Contacts) {
+    $scope.action = 'Edit';
     $scope.contact = Contacts.get($routeParams.id);
     $scope.save = function() {
         $scope.contact.$update(function(){
@@ -40,7 +57,7 @@ contactManager.controller('EditController', ['$scope','$routeParams', '$location
 contactManager.config(['$routeProvider', function($routeProvider){
    $routeProvider
     .when('/', { controller: 'ListController', templateUrl: '/js/views/list.html' })
-    .when('/create', { controller: 'CreateController', templateUrl: '/js/views/create.html' })
+    .when('/create', { controller: 'CreateController', templateUrl: '/js/views/edit.html' })
     .when('/edit/:username/:id', { controller: 'EditController', templateUrl: '/js/views/edit.html' })
     .otherwise('/'); 
 }]);
@@ -55,23 +72,26 @@ contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($reso
     });
 
     cache = (function(){
-        var contacts = [];
+        var contacts = [], 
+            isLoaded = false;
+            
         return {
-            hasContacts: function() {
-                return contacts.length > 0;
-            }, 
-
             getContacts: function() {
                 return contacts;
             }, 
 
             putContacts: function(newContacts) {
                 contacts = newContacts;
+                isLoaded = true;
             }, 
 
             addContact: function(contact) {
                 contacts.push(contact);
             },
+            
+            isLoaded: function() {
+                return isLoaded;
+            }, 
 
             indexOf: function(id) {
                 var arrayIndex; 
@@ -116,7 +136,7 @@ contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($reso
             var contacts,
             useCache = useCache || true;
 
-            if (cache.hasContacts() && useCache) {
+            if (cache.isLoaded() && useCache) {
                 return cache.getContacts();      
             } else {
                 contacts = Contacts.query(function(){
@@ -133,8 +153,8 @@ contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($reso
         create: function(contact, success, failure) {
            var newContact = new Contacts(contact);
 
-           newContact.$save(function(createdContact){
-              cachedContacts[createdContact._id] = createdContact;
+           newContact.$save(function(){
+              cache.addContact(newContact);
               if (typeof success === 'function') {
                   success.apply(null, arguments); 
               }
