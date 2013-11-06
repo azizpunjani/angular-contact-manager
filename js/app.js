@@ -1,7 +1,5 @@
-
 var contactManager = angular.module('ContactManager', ['ngResource']);
 contactManager.controller('ListController', ['$scope','Contacts' , function($scope, Contacts) {
-    globalContacts = Contacts;
     $scope.contacts = Contacts.getAll(); 
     $scope.getFullName = function(contact) {
         var first = sanitize(contact.name.first), 
@@ -14,9 +12,7 @@ contactManager.controller('ListController', ['$scope','Contacts' , function($sco
     }
 
     $scope.delete = function(contact) {
-        Contacts.delete(contact, function(){
-
-        });
+        Contacts.delete(contact);
     }
 }]);
 
@@ -183,9 +179,8 @@ contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($reso
 
         update: function(contact, success) {
             contact.$update(function(){
-               success();
+               success.apply(null, arguments);
             });  
-        },
-        getCache: function() { return cache.getContacts(); } 
+        }
     }
 }]);
