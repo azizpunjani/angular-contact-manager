@@ -1,9 +1,11 @@
 <h1 class="center-text">Contacts</span></h1>
-<div class="contacts-container">
-    <div>
-        <input type="text" placeholder="Search for contact..">
+    <div class="utility-bar">
+        <input type="text" ng-model="search"  placeholder="Search for contact..">
+        <a title="add" class="icon icon-plus" href="#/create/"></a>
     </div>
-    <div ng-repeat="contact in contacts">
+
+<div class="contacts-container">
+        <div ng-repeat="contact in contacts | filter:search:fullName | orderBy: contact">
         <div class="contact-list-item">
             <span class="icon-user"></span>
             <a title="edit" class="contact-fullname" href="#/edit/{{getFullName(contact)}}/{{contact._id}}">

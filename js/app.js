@@ -6,7 +6,7 @@ contactManager.controller('ListController', ['$scope','Contacts' , function($sco
             last = sanitize(contact.name.last);
         return [first, last].join('_');
     }
-    
+
     function sanitize(name) {
         return name.replace(/[^\w\d']/g,'');
     }
@@ -165,8 +165,8 @@ contactManager.factory('Contacts', ['$resource', '$cacheFactory', function($reso
             var contactIndex = cache.indexOf(contact._id);
 
             contact.$delete(function(){
+                cache.removeContactByIndex(contactIndex);
                 if (typeof success === 'function') {
-                    cache.removeContactByIndex(contactIndex);
                     success.apply(null, arguments);
                 }
             }, function() {

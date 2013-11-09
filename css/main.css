@@ -50,11 +50,19 @@ body {
   background: transparent url("../images/background.png") repeat;
   font-family: 'Arimo', cursive; }
 
-.details-section h4 {
-  font-weight: bold;
-  color: gray;
-  font-size: 20px;
-  margin: 10px 0; }
+.details-container {
+  padding: 20px; }
+  .details-container label {
+    width: 150px;
+    display: inline-block;
+    text-align: right;
+    color: #585858; }
+  .details-container input {
+    border-radius: 4px;
+    padding: 2px;
+    width: 210px; }
+  .details-container > div {
+    margin-top: 4px; }
 
 .main-container {
   margin: 60px auto;
@@ -88,19 +96,40 @@ body {
   background-color: rgba(233, 233, 233, 0.66);
   color: #858585; }
   .contact-list-item a.icon {
-    text-decoration: none;
-    color: inherit;
     float: right;
     margin: 0 10px;
     border: 1px solid gray;
     padding: 5px;
     border-radius: 11px; }
+  .contact-list-item:first-child {
+    margin-top: 0px; }
+
+a.icon {
+  text-decoration: none;
+  color: inherit; }
 
 .contact-fullname {
   color: inherit; }
 
 .size-medium {
   font-size: 16px; }
+
+.utility-bar {
+  padding: 10px; }
+  .utility-bar input {
+    width: 85%;
+    font-size: 20px;
+    padding: 5px 9px;
+    margin: 4px 4px 5px;
+    box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 0; }
+  .utility-bar .icon-plus {
+    font-size: 20px;
+    top: 2px;
+    position: relative;
+    color: gray; }
 
 .contacts-container {
   overflow-y: scroll;
