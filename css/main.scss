@@ -7,21 +7,19 @@ body {
     font-family: 'Arimo', cursive;
 }
 
-button {
-    
-}
-
 .details-container{
     padding: 20px;
     label {
         width: 150px; 
         display: inline-block;
         text-align: right;
+        font-size: 20px;
         color: rgb(88, 88, 88);
     }
     input {
+        font-size: 15px;
         border-radius: 4px;
-        padding: 2px;
+        padding: 5px;
         width: 210px;
     }
     & > div {
@@ -86,10 +84,10 @@ a.icon {
 }
 
 .utility-bar {
-    padding: 10px; 
+    padding: 5px; 
 
     input {
-        width: 85%;
+        width: 87%;
         font-size: 20px;
         padding: 5px 9px;
         margin: 4px 4px 5px;
@@ -100,10 +98,11 @@ a.icon {
     }
 
     .icon-plus {
-        font-size: 20px;
+        font-size: 25px;
         top: 2px;
         position: relative;
         color: gray;
+        cursor: pointer;
     }
 
 }

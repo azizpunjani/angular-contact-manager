@@ -11,15 +11,15 @@
     </div>
     <div> 
         <label>Mobile Number:</label>
-        <input type="text" ng-model="contact.phone.mobile"> 
+        <input type="number" ng-model="contact.phone.mobile" /> 
     </div>
     <div> 
         <label>Home Number:</label>
-        <input type="text" ng-model="contact.phone.home"> 
+        <input type="number" ng-model="contact.phone.home"> 
     </div>
     <div> 
         <label>Email:</label>
-        <input type="text" ng-model="contact.email"> 
+        <input type="email" ng-model="contact.email"> 
     </div>
     <div> 
         <label>Street:</label>
@@ -35,7 +35,7 @@
     </div>
     <div>
         <label>Zip:</label>
-        <input type="text" ng-model="contact.address.zip">
+        <input type="number" ng-model="contact.address.zip">
     </div>
 
     <button ng-click="cancel()">Cancel</button> 
