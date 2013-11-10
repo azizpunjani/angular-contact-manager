@@ -6,7 +6,6 @@ contactManager.factory('Contacts', ['$resource', 'Cache', function($resource, Ca
         update: { method: 'PUT', params: { id: '@id' } }
     });
 
-
     return {
         getAll: function(useCache) {                
             var contacts,

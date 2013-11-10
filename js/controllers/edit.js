@@ -1,4 +1,5 @@
-contactManager.controller('EditController', ['$scope','$routeParams', '$location', 'Contacts', function($scope, $routeParams, $location, Contacts) {
+contactManager.controller('EditController', ['$scope','$routeParams', '$location', 'Contacts', 
+    function($scope, $routeParams, $location, Contacts) {
     $scope.action = 'Edit';
     $scope.contact = Contacts.get($routeParams.id);
     $scope.save = function() {

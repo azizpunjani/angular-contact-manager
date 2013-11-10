@@ -12,8 +12,8 @@ contactManager.factory('Cache', [function(){
             isLoaded = true;
         }, 
 
-        addContact: function(contact) {
-            contacts.push(contact);
+        addContact: function(newContact) {
+            contacts.push(newContact);
         },
         
         isLoaded: function() {

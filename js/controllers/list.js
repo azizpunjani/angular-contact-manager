@@ -1,4 +1,5 @@
-contactManager.controller('ListController', ['$scope','Contacts' , function($scope, Contacts) {
+contactManager.controller('ListController', ['$scope', 'Contacts',
+    function($scope, Contacts) {
     $scope.contacts = Contacts.getAll(); 
     $scope.getFullName = function(contact) {
         var first = sanitize(contact.name.first), 
