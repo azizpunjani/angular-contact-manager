@@ -1,4 +1,4 @@
-var contactManager = angular.module('ContactManager', ['ngResource']);
+var contactManager = angular.module('ContactManager', ['ngResource', 'ngRoute', 'ngAnimate']);
 
 contactManager.config(['$routeProvider', function($routeProvider){
    $routeProvider

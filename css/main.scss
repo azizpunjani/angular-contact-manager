@@ -39,7 +39,7 @@ body {
         font-family: 'Oxygen', sans-serif;
         text-align: center;
         text-shadow: 0px 1px 1px white;
-        background: linear-gradient(rgb(243, 243, 243), rgb(192, 192, 192));
+        background: @include linear-gradient(rgb(243, 243, 243), rgb(192, 192, 192));
         padding: 12px;
         border-radius: 4px 2px 0 0;
         border-bottom: 3px solid rgba(173, 173, 173, 0.42);
@@ -91,7 +91,7 @@ a.icon {
         font-size: 20px;
         padding: 5px 9px;
         margin: 4px 4px 5px;
-        box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
+        @include box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
         background-color: rgb(250, 250, 250);
         border-radius: 5px;
         border: 0;

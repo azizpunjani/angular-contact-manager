@@ -1,7 +1,12 @@
 {
   "name": "Angular Contact Manager",
   "dependencies": {
-    "angular": "~1.0.8",
-    "angular-resource": "~1.0.8"
+    "angular-resource": "1.2.1",
+    "angular": "1.2.1",
+    "angular-animate": "~1.2.0",
+    "angular-route": "~1.2.1"
+  },
+  "resolutions": {
+    "angular": "1.2.1"
   }
 }
