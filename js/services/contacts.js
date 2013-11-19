@@ -3,7 +3,7 @@ contactManager.factory('Contacts', ['$resource', 'Cache', function($resource, Ca
 
     Contacts = $resource('/contacts/:id',{ id: '@_id' }, {
         query: { method: 'GET', params: { id: '' }, isArray: true },
-        update: { method: 'PUT', params: { id: '@id' } }
+        update: { method: 'PUT' }
     });
 
     return {

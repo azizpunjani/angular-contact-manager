@@ -50,6 +50,20 @@ body {
   background: transparent url("../images/background.png") repeat;
   font-family: 'Arimo', cursive; }
 
+button {
+  font-size: 17px;
+  color: gray;
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  cursor: pointer; }
+
+.buttons-container {
+  width: 170px;
+  margin: 0 auto;
+  padding: 20px 0; }
+
 .details-container {
   padding: 20px; }
   .details-container label {
@@ -66,6 +80,32 @@ body {
   .details-container > div {
     margin-top: 4px; }
 
+.animate.ng-enter {
+  -webkit-transition: 1s linear all;
+  transition: 1s linear all;
+  opacity: 0; }
+
+.animate.ng-enter-active {
+  opacity: 1; }
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s; }
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity: 0;
+  max-height: 0; }
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity: 1;
+  max-height: 40px; }
+
 .main-container {
   margin: 60px auto;
   width: 460px;
@@ -79,22 +119,28 @@ body {
   -o-border-radius: 5px;
   border-radius: 5px; }
   .main-container h1 {
-    font-size: 33px;
+    font-size: 29px;
     font-family: 'Oxygen', sans-serif;
     text-align: center;
     text-shadow: 0px 1px 1px white;
-    background: linear-gradient(#f3f3f3, #c0c0c0);
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f3f3f3), color-stop(100%, #c0c0c0));
+    background-image: -webkit-linear-gradient(#f3f3f3, #c0c0c0);
+    background-image: -moz-linear-gradient(#f3f3f3, #c0c0c0);
+    background-image: -o-linear-gradient(#f3f3f3, #c0c0c0);
+    background-image: linear-gradient(#f3f3f3, #c0c0c0);
     padding: 12px;
     border-radius: 4px 2px 0 0;
-    border-bottom: 3px solid rgba(173, 173, 173, 0.42);
     color: rgba(41, 41, 41, 0.53); }
+  .main-container h1.short {
+    width: 83%;
+    float: left; }
 
 .contact-list-item {
   padding: 20px;
   margin: 8px 1px;
   border-top: 1px dashed #c9c9c9;
   border-bottom: 1px dashed #c9c9c9;
-  font-size: 28px;
+  font-size: 23px;
   background-color: rgba(233, 233, 233, 0.66);
   color: #858585; }
   .contact-list-item a.icon {
@@ -116,27 +162,45 @@ a.icon {
 .size-medium {
   font-size: 16px; }
 
-.utility-bar {
-  padding: 5px; }
-  .utility-bar input {
-    width: 90%;
-    font-size: 20px;
-    padding: 5px 9px;
-    margin: 4px 4px 5px;
-    box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
-    background-color: #fafafa;
-    border-radius: 5px;
-    border: 0; }
-  .utility-bar .icon-plus {
-    font-size: 25px;
-    top: 2px;
-    position: relative;
-    color: gray;
-    cursor: pointer; }
+.utility-bar input {
+  width: 96%;
+  font-size: 20px;
+  color: gray;
+  padding: 5px 9px;
+  margin: 8px;
+  -webkit-box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
+  -moz-box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
+  box-shadow: inset 0px 0px 9px 0px rgba(73, 72, 72, 0.52);
+  background-color: #fafafa;
+  border: 0; }
+.utility-bar .icon-search {
+  color: gray;
+  font-size: 20px; }
+.utility-bar .wrapper {
+  margin: 0 auto; }
 
 .contacts-container {
   overflow-y: scroll;
   height: 350px; }
+
+.header {
+  height: 53px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f3f3f3), color-stop(100%, #c0c0c0));
+  background-image: -webkit-linear-gradient(#f3f3f3, #c0c0c0);
+  background-image: -moz-linear-gradient(#f3f3f3, #c0c0c0);
+  background-image: -o-linear-gradient(#f3f3f3, #c0c0c0);
+  background-image: linear-gradient(#f3f3f3, #c0c0c0);
+  background-color: #eeeeee;
+  border-radius: 5px 5px 0; }
+  .header .icon-plus {
+    font-size: 17px;
+    text-shadow: 0px 1px 1px white;
+    color: rgba(41, 41, 41, 0.53);
+    border-left: 2px solid #bdbdbd;
+    padding: 13px;
+    margin-left: 7px;
+    top: 17px;
+    position: relative; }
 
 ::-webkit-scrollbar {
   width: 12px; }
