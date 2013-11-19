@@ -1,40 +1,40 @@
 <h1 class="center-text">{{action}} Contact</h1>
 <div class="details-container">
     <div> 
-        <label>First Name:</label>
-        <input type="text" ng-model="contact.name.first"> 
+        <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" ng-model="contact.name.first"> 
     </div>
     <div> 
-        <label>Last Name:</label>
-        <input type="text" ng-model="contact.name.last"> 
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" type="text" ng-model="contact.name.last"> 
     </div>
     <div> 
-        <label>Mobile Number:</label>
-        <input type="number" ng-model="contact.phone.mobile" /> 
+        <label for="mobileNumber">Mobile Number:</label>
+        <input id="mobileNumber" type="number" ng-model="contact.phone.mobile" /> 
     </div>
     <div> 
-        <label>Home Number:</label>
-        <input type="number" ng-model="contact.phone.home"> 
+        <label for="homeNumber">Home Number:</label>
+        <input id="homeNumber" type="number" ng-model="contact.phone.home"> 
     </div>
     <div> 
-        <label>Email:</label>
-        <input type="email" ng-model="contact.email"> 
+        <label for="email">Email:</label>
+        <input id="email" type="email" ng-model="contact.email"> 
     </div>
     <div> 
-        <label>Street:</label>
-        <input type="text" ng-model="contact.address.street">
+        <label for="street">Street:</label>
+        <input id="street" type="text" ng-model="contact.address.street">
     </div>
     <div>
-        <label>City:</label>
-        <input type="text" ng-model="contact.address.city">
+        <label for="city">City:</label>
+        <input id="city" type="text" ng-model="contact.address.city">
     </div>
     <div>
-        <label>State:</label>
-        <input type="text" ng-model="contact.address.state">
+        <label for="state">State:</label>
+        <input id="state" type="text" ng-model="contact.address.state">
     </div>
     <div>
-        <label>Zip:</label>
-        <input type="number" ng-model="contact.address.zip">
+        <label for="zip">Zip:</label>
+        <input id="zip" type="number" ng-model="contact.address.zip">
     </div>
 <div class="buttons-container">
     <button ng-click="cancel()">Cancel</button> 

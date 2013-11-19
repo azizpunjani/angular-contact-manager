@@ -18,7 +18,7 @@ button {
 }
 
 .buttons-container {
-    width: 170px; 
+    width: 255px; 
     margin: 0 auto;
     padding: 20px 0;
 }
@@ -44,13 +44,13 @@ button {
 }
 
 
-.animate.ng-enter {
+.animate-view.ng-enter {
     -webkit-transition: 1s linear all; 
     transition: 1s linear all;
     opacity: 0;
 }
 
-.animate.ng-enter-active {
+.animate-view.ng-enter-active {
      opacity: 1;
 }
 
@@ -76,7 +76,8 @@ button {
 }
 
 .main-container {
-    margin: 60px auto;
+    margin: 0 auto;
+    margin-top: 50px;
     width: 460px;
     background-color: white;
     @include box-shadow(rgba(175, 175, 175, 0.9) 0px 0px 7px 3px);
